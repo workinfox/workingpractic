@@ -1,0 +1,223 @@
+5.1
+using System;
+using System.IO;
+using System.Linq;
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            string[] lines = File.ReadAllText(@"C:\Users\Арина\numTask1.txt").Split(' ');; // Чтение всех строк из файла
+            int[] numbers = Array.ConvertAll(lines, int.Parse);
+
+            int minIndex = 0;
+            int minArray = numbers[0];
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] < minArray)
+                {
+                    minArray = numbers[i];
+                    minIndex = i;
+                }
+            }
+
+            int prov = 1; //произведение  = 1
+            for (int i = minIndex + 1; i < numbers.Length; i++)
+            {
+                prov *= numbers[i];
+            }
+
+            Console.WriteLine($"Произведение элементов после минимального: {prov}");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Файл не найден");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Файл содержит некорректные данные");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Произошла ошибка: " + e.Message);
+        }
+    }
+}
+
+
+
+
+
+5.2 using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Чтение вещественных чисел из файла
+            string[] lines = File.ReadAllText(@"C:\Users\gr622_krami\numTask2.txt").Split(';');
+            float[] numbers = new float[lines.Length];
+
+            // Преобразование строк в массив вещественных чисел
+            for (int i = 0; i < lines.Length; i++)
+            {
+                numbers[i] = float.Parse(lines[i]);
+            }
+
+            // Сортировка чисел по возрастанию
+            Array.Sort(numbers);
+
+            // Преобразование массива обратно в строку с разделителем ;
+            string sortedData = string.Join(";", numbers);
+
+            // Запись отсортированных чисел обратно в файл
+            File.WriteAllText(@"C:\Users\gr622_krami\numTask2.txt", sortedData);
+
+            Console.WriteLine("Числа были успешно отсортированы и записаны обратно в файл.");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Файл не найден");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Файл содержит некорректные данные");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Произошла ошибка: " + e.Message);
+        }
+    }
+}
+
+
+
+
+
+5.3
+using System;
+using System.IO;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Чтение чисел из файла и разделение их по пробелу
+            string[] lines = File.ReadAllText(@"C:\Users\Арина\numTask3.txt").Split(' ');
+
+            // Преобразование чисел к типу int
+            int[] numbers = Array.ConvertAll(lines, int.Parse);
+
+            // Поиск минимального числа и его индекса
+            int minIndex = Array.IndexOf(numbers, numbers.Min());
+
+            // Если минимальное число находится в начале массива, среднее не вычисляется
+            if (minIndex == 0)
+            {
+                Console.WriteLine("Перед минимальным числом нет элементов");
+            }
+            else
+            {
+                // Вычисление среднего арифметического элементов до минимального числа
+                double average = numbers.Take(minIndex).Average();
+                Console.WriteLine($"Среднее арифметическое элементов до минимального: {average}");
+            }
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Файл не найден");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Файл содержит некорректные данные");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Произошла ошибка: " + e.Message);
+        }
+    }
+}
+
+
+
+
+
+5.4
+using System;
+using System.IO;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            string[] lines = File.ReadAllText(@"C:\Users\Арина\numTask4.txt").Split(' ');
+
+            int[] nums = Array.ConvertAll(lines, int.Parse);
+            int maxNum = nums.Max();
+            int sum = nums.Where(x => Math.Abs(x - maxNum) == 1).Sum();
+            Console.WriteLine($"Сумма элементов, отличающихся от максимального на 1: {sum}");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Файл не найден");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Файл содержит некорректные данные");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Произошла ошибка: " + e.Message);
+        }
+        
+    }
+}
+
+
+
+
+
+5.5
+using System;
+using System.IO;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            string[] lines = File.ReadAllText(@"C:\Users\Арина\numTask5.txt").Split(' ');
+
+            int[] nums = Array.ConvertAll(lines, int.Parse);
+            int minNum = nums.Min();
+            int maxNum = nums.Max();
+            double result = nums.Where(x => x > minNum && x < maxNum).Average();
+            Console.WriteLine($"Среднее арифметическое элементов между минимальным и максимальным: {result}");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Файл не найден");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Файл содержит некорректные данные");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Произошла ошибка: " + e.Message);
+        }
+    }
+}

@@ -1,0 +1,134 @@
+3.1
+using System;
+using System.IO;
+
+
+class Program
+{
+    static void Main()
+    {
+        string[] lines = File.ReadAllLines(@"C:\Users\gr622_krami\input.txt");
+
+        // Получение выбранных чисел
+        string[] selectedNumbersStr = lines[0].Split(' ');
+        int[] selectedNumbers = Array.ConvertAll(selectedNumbersStr, int.Parse);
+
+        // Получение количества лотерейных билетов
+        int n = int.Parse(lines[1]);
+
+        // Создание потока для записи в файл
+        using (StreamWriter writer = new StreamWriter(@"C:\Users\gr622_krami\output.txt"))
+        {
+            // Проверка каждого лотерейного билета
+            for (int i = 2; i < n + 2; i++)
+            {
+                // Получение чисел на текущем билете
+                string[] ticketNumbersStr = lines[i].Split(' ');
+                int[] ticketNumbers = Array.ConvertAll(ticketNumbersStr, int.Parse);
+
+                // Подсчет количества совпадающих чисел
+                int count = 0;
+                foreach (int number in ticketNumbers)
+                {
+                    if (Array.Exists(selectedNumbers, x => x == number))
+                    {
+                        count++;
+                        if (count >= 3)
+                        {
+                            break;
+                        }
+                            
+                    }
+                }
+                // Вывод результата в файл Output.txt
+                if (count >= 3)
+                {
+                    writer.WriteLine("Lucky");
+                }
+                else
+                {
+                    writer.WriteLine("Unlucky");
+                }
+            }
+        }
+        Console.WriteLine("Готово! Результаты записаны в файл Output.txt.");
+    }
+}
+
+
+
+
+
+3.2
+using System;
+using System.IO;
+using System.Linq;
+class Program
+{
+    static void Main()
+    {
+        string input = File.ReadAllText(@"C:\Users\gr622_krami\nums.txt");
+
+        int[] numbers = input.Split(new char[] {' ', ','}).Select(int.Parse).ToArray();
+
+        // Фильтруем массив, оставляя только нечетные числа
+        string[] oddNumbers = new String[numbers.Length];
+        int c = 0;
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            if (numbers[i] % 2 == 1)
+            {
+                oddNumbers[c] = Convert.ToString(numbers[i]);
+                c++;
+            }
+        }
+        // Записываем новые значения в файл nums.txt
+        File.WriteAllText(@"C:\Users\gr622_krami\nums.txt", string.Join(" ", oddNumbers));
+    }
+}
+
+
+
+
+
+3.3
+using System;
+using System.IO;
+
+
+class Program
+{
+    static void Main()
+    {
+        string[] lines = File.ReadAllLines(@"C:\Users\gr622_krami\numbers.txt");
+
+        string[] heightsStr = lines[0].Split(' ');
+        int[] heights = new int[heightsStr.Length];
+
+        for (int i = 0; i < heightsStr.Length; i++)
+        {
+            heights[i] = int.Parse(heightsStr[i]);
+        }
+
+        int maxArea = 0;
+        int left = 0;
+        int right = heights.Length - 1;
+
+        while (left < right)
+        {
+            int currentArea = (right - left) * Math.Min(heights[left], heights[right]);
+            maxArea = Math.Max(maxArea, currentArea);
+
+            if (heights[left] < heights[right])
+            {
+                left++;
+            }
+            else
+            {
+                right--;
+            }
+        }
+
+        Console.WriteLine("Наибольшее количество воды, которое может вместить контейнер: " + maxArea);
+    }
+}

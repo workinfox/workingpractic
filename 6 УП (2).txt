@@ -1,0 +1,136 @@
+6.1
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        // Путь к файлу
+        string filePath = @"C:\Users\gr622_krami\nuTask1.txt";
+
+        // Считывание слов из файла
+        string fileContent = File.ReadAllText(filePath);
+        string[] words = fileContent.Split();
+
+        Console.WriteLine("Слова нечетной длины:");
+
+        // Вывод слов нечетной длины
+        foreach (string word in words)
+        {
+            if (word.Length % 2 != 0)
+            {
+                Console.WriteLine(word);
+            }
+        }
+    }
+}
+
+
+
+
+
+6.2
+using System;
+using System.IO;
+using System.Text;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Чтение слов из файла
+            string[] words = File.ReadAllLines(@"C:\Users\gr622_krami\nuTask2.txt");
+
+            // Составление одной длинной строки (разделение каждого слова пробелом)
+            StringBuilder result = new StringBuilder();
+            foreach (string word in words)
+            {
+                result.Append(word);
+                result.Append(" ");
+            }
+
+            string concatenatedWords = result.ToString().Trim();
+
+            Console.WriteLine("Результат: " + concatenatedWords);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Файл не найден");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Произошла ошибка: " + e.Message);
+        }
+    }
+}
+
+
+
+
+
+6.3
+using System;
+using System.IO;
+using System.Text;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите число: ");
+        int n = int.Parse(Console.ReadLine());
+
+        if (n % 2 == 0 && n % 10 == 0)
+        {
+            Console.WriteLine($"Число {n} является чётным и кратным 10");
+        }
+        else
+        {
+            Console.WriteLine($"Число {n} не является чётным и кратным 10");
+        }
+    }
+}
+
+
+
+
+
+6.4
+namespace positivenumbers;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.Write("Введите положительное число a: ");
+        int a = int.Parse(Console.ReadLine());
+        
+        int sum = 0;
+        
+        while (true)
+        {
+            Console.Write("Введите число: ");
+            int nums = int.Parse(Console.ReadLine());
+
+            if (nums < 0)
+            {
+                break;
+            }
+
+            if (nums % a == 0)
+            {
+                sum += nums;
+            }
+        }
+        Console.WriteLine($"Сумма чисел, делящихся на {a} нацело равно: {sum}");
+    }
+}
+
+
+
+
+
+6.5

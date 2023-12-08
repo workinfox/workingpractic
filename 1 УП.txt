@@ -1,0 +1,196 @@
+1.1 
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Создаем экземпляр генератора случайных чисел
+        Random rand = new Random();
+
+        // Создаем массив с 10 случайными числами
+        int[] num = new int[10];
+        for (int i = 0; i < num.Length; i++)
+        {
+            num[i] = rand.Next();
+        }
+
+        // Ищем минимальный элемент и его индекс в массиве
+        int min = num[0];
+        int minIndex = 0;
+        for (int i = 1; i < num.Length; i++)
+        {
+            if (num[i] < min)
+            {
+                min = num[i];
+                minIndex = i;
+            }
+        }
+
+        // Выводим номер минимального элемента в консоль
+        Console.WriteLine("Номер минимального элемента: " + minIndex);
+
+        Console.ReadLine();
+    }
+}
+
+
+
+
+
+1.2
+using System;
+using System.Collections.Generic;
+
+namespace Addingnumberstoalist
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> nums = new List<int>();
+            int a;
+
+            do
+            {
+                Console.WriteLine("Введите число (введите 0 для того, чтобы закончить): ");
+                a = Convert.ToInt32(Console.ReadLine());
+
+                if (a != 0)
+                {
+                    nums.Add(a);
+                }
+            } while (a != 0);
+
+            int sum = 0;
+            foreach (int num in nums)
+            {
+                sum += num;
+            }
+            
+            Console.WriteLine("Сумма всех элементов списка: " + sum);
+
+            int comp = 1;
+            foreach (int num in nums)
+            {
+                comp *= num;
+            }
+            Console.WriteLine("Произведение всех элементов списка: " + comp);
+            
+            double average = (double)sum / nums.Count;
+            Console.WriteLine("Среднее всех элементов списка: " + average);
+        }
+    }
+}
+
+
+
+
+
+1.3
+using System;
+using System.Collections.Generic;
+
+namespace Addstring
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> elem = new List<string>();
+            string a;
+
+            do
+            {
+                Console.WriteLine("Введите элементы (нажмите enter для того, чтобы закончить): ");
+                a = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(a))
+                {
+                    elem.Add(a);
+                }
+            } while (!string.IsNullOrEmpty(a));
+
+            if (elem.Count > 0)
+            {
+                string shortest = elem[0];
+                string longest = elem[0];
+
+                foreach (string element in elem)
+                {
+                    if (element.Length < shortest.Length)
+                    {
+                        shortest = element;
+                    }
+
+                    if (element.Length > longest.Length)
+                    {
+                        longest = element;
+                    }
+                }
+                Console.WriteLine("Самый короткий элемент: " + shortest);
+                Console.WriteLine("Самый длинный элемент: " + longest);
+            }
+            else
+            {
+                Console.WriteLine("Список пуст!");
+            }
+        }
+    }
+}
+
+
+
+
+1.4
+using System;
+using System.Collections.Generic;
+
+namespace Numbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> nums = new List<int>();
+            int a;
+            Console.Write("Введите минимальное значение диапазона: ");
+            int min = int.Parse(Console.ReadLine());
+            Console.Write("Введите максимальное значение диапазона: ");
+            int max = int.Parse(Console.ReadLine());
+            Random rand = new Random();
+            int randn;
+            for (int i = 0; i < 10; i++)
+            {
+                randn = rand.Next(min, max + 1);
+                nums.Add(randn);
+            }
+            Console.WriteLine("Сгенерированный список случайных чисел: " + string.Join(" ", nums));
+        }
+    }
+}
+
+
+
+
+
+1.5
+using System;
+
+
+namespace Listwithrandomnumbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите фразу: ");
+            string a = Console.ReadLine();
+
+            string[] words = a.Split(new char[] {' ', ','});
+            Console.WriteLine("Количество слов в строке: " + words.Length);
+            string n = "Start " + a + " End";
+            Console.WriteLine(n);
+        }
+    }
+}
